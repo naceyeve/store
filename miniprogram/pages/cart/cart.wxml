@@ -1,2 +1,5 @@
 <!--miniprogram/pages/cart/cart.wxml-->
-<text>miniprogram/pages/cart/cart.wxml</text>
+<image class="bg" src="/images/bg.png"></image>
+<view wx:if="{{!userInfo}}">
+  <login bindonLogin="onTapLogin"></login>
+</view>
