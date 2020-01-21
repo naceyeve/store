@@ -15,6 +15,8 @@ Page({
       this.setData({
         userInfo : userInfo
       })
+    }).catch(err => {
+      console.log('Not Authenticated yet');
     })
   },
 

@@ -2,6 +2,8 @@ const db = wx.cloud.database({
   env: 'naceyeve'
 })
 
+const util = require('./util')
+
 module.exports = {
   /**
    * get products list
@@ -19,5 +21,38 @@ module.exports = {
         id: id
       },
     })
+  },
+
+  addToOrder(data){
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'addToOrder',
+          data,
+        })
+      })
+      .catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
+  },
+  
+  getOrders() {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'getOrders',
+        })
+      })
+      .catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
   },
 }
