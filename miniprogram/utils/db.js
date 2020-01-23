@@ -104,4 +104,9 @@ module.exports = {
         return {}
       })
   },
+  getReviews(productId) {
+    return db.collection('review').where({
+      productId,
+    }).get()
+  },
 }
