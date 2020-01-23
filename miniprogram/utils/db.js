@@ -55,4 +55,53 @@ module.exports = {
         return {}
       })
   },
+
+  addToCart(data) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'addToCart',
+          data,
+        })
+      }).catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
+  },
+  
+  getCart() {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'getCart',
+        })
+      }).catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
+  },
+
+  updateCart(list) {
+    return util.isAuthenticated()
+      .then(() => {
+        return wx.cloud.callFunction({
+          name: 'updateCart',
+          data: {
+            list,
+          },
+        })
+      }).catch(() => {
+        wx.showToast({
+          icon: 'none',
+          title: 'Please Login First'
+        })
+        return {}
+      })
+  },
 }

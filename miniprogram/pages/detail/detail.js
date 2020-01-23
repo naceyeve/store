@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+    product: {},
   },
 
   /**
@@ -82,5 +82,32 @@ Page({
         title: 'Failed'
       })
     })
-  }
+  },
+
+  addToCart() {
+    wx.showLoading({
+      title: 'Loading...',
+    })
+
+    db.addToCart(this.data.product).then(result => {
+      wx.hideLoading()
+
+      const data = result.result
+
+      if (data) {
+        wx.showToast({
+          title: 'Succeed'
+        })
+      }
+    }).catch(err => {
+      console.error(err)
+      wx.hideLoading()
+
+      wx.showToast({
+        icon: 'none',
+        title: 'Failed'
+      })
+    })
+  },
+
 })
